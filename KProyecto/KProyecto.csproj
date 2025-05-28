@@ -146,11 +146,23 @@
     <Content Include="Content\style.css" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
+    <Content Include="Images\2.jpg" />
     <Content Include="Images\auth-bg.jpg" />
     <Content Include="Images\logo-icon.png" />
+    <Content Include="Images\logo-light-icon.png" />
+    <Content Include="Images\logo-light-text.png" />
+    <Content Include="Images\logo-text.png" />
+    <Content Include="Scripts\app-style-switcher.js" />
+    <Content Include="Scripts\app.init.js" />
+    <Content Include="Scripts\app.min.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\custom.min.js" />
     <Content Include="Scripts\jquery.min.js" />
+    <Content Include="Scripts\perfect-scrollbar.jquery.min.js" />
     <Content Include="Scripts\popper.min.js" />
+    <Content Include="Scripts\sidebarmenu.js" />
+    <Content Include="Scripts\sparkline.js" />
+    <Content Include="Scripts\waves.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -206,6 +218,7 @@
     <Content Include="Content\icons\weather-icons\fonts\weathericons-regular-webfont.woff" />
     <Content Include="Content\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
     <None Include="packages.config" />
+    <Content Include="Views\Home\Principal.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
