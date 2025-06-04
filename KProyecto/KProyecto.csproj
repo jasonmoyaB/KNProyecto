@@ -218,6 +218,7 @@
     <Content Include="Content\icons\weather-icons\fonts\weathericons-regular-webfont.woff2" />
     <None Include="packages.config" />
     <Content Include="Views\Home\Principal.cshtml" />
+    <Content Include="Views\Home\Registro.cshtml" />
   </ItemGroup>
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
