@@ -29,7 +29,10 @@ namespace KProyecto.Controllers
                     autenticacion.Contrasenna).FirstOrDefault();
 
                 if (result != null)
+                {
+                    Session["Nombre"] = result.Nombre;
                     return RedirectToAction("Principal", "Home");
+                }
 
                 ViewBag.Mensaje = "No se pudo validar su información";
                 return View();
@@ -73,6 +76,24 @@ namespace KProyecto.Controllers
                 ViewBag.Mensaje = "No se pudo registrar su información";
                 return View();
             }
+        }
+
+        #endregion
+
+        #region RecuperarContrasenna
+
+        [HttpGet]
+        public ActionResult RecuperarContrasenna()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult RecuperarContrasenna(Autenticacion autenticacion)
+        {
+            //Accion
+
+            return View();
         }
 
         #endregion
