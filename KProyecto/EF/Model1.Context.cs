@@ -29,8 +29,12 @@ namespace KProyecto.EF
     
         public virtual DbSet<TUsuario> TUsuario { get; set; }
     
-        public virtual int RegistroUsuario(string nombre, string correo, string nombreUsuario, string contrasenna)
+        public virtual int RegistroUsuario(string identificacion, string nombre, string correo, string contrasenna)
         {
+            var identificacionParameter = identificacion != null ?
+                new ObjectParameter("Identificacion", identificacion) :
+                new ObjectParameter("Identificacion", typeof(string));
+    
             var nombreParameter = nombre != null ?
                 new ObjectParameter("Nombre", nombre) :
                 new ObjectParameter("Nombre", typeof(string));
@@ -39,28 +43,24 @@ namespace KProyecto.EF
                 new ObjectParameter("Correo", correo) :
                 new ObjectParameter("Correo", typeof(string));
     
-            var nombreUsuarioParameter = nombreUsuario != null ?
-                new ObjectParameter("NombreUsuario", nombreUsuario) :
-                new ObjectParameter("NombreUsuario", typeof(string));
-    
             var contrasennaParameter = contrasenna != null ?
                 new ObjectParameter("Contrasenna", contrasenna) :
                 new ObjectParameter("Contrasenna", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistroUsuario", nombreParameter, correoParameter, nombreUsuarioParameter, contrasennaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("RegistroUsuario", identificacionParameter, nombreParameter, correoParameter, contrasennaParameter);
         }
     
-        public virtual ObjectResult<ValidarInicioSesion_Result> ValidarInicioSesion(string nombreUsuario, string contrasenna)
+        public virtual ObjectResult<ValidarInicioSesion_Result> ValidarInicioSesion(string correo, string contrasenna)
         {
-            var nombreUsuarioParameter = nombreUsuario != null ?
-                new ObjectParameter("NombreUsuario", nombreUsuario) :
-                new ObjectParameter("NombreUsuario", typeof(string));
+            var correoParameter = correo != null ?
+                new ObjectParameter("Correo", correo) :
+                new ObjectParameter("Correo", typeof(string));
     
             var contrasennaParameter = contrasenna != null ?
                 new ObjectParameter("Contrasenna", contrasenna) :
                 new ObjectParameter("Contrasenna", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ValidarInicioSesion_Result>("ValidarInicioSesion", nombreUsuarioParameter, contrasennaParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<ValidarInicioSesion_Result>("ValidarInicioSesion", correoParameter, contrasennaParameter);
         }
     }
 }
