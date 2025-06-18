@@ -1,17 +1,15 @@
 ﻿using KProyecto.EF;
 using KProyecto.Models;
-using System;
+using KProyecto.Services;
 using System.Linq;
-using System.Net.Mail;
-using System.Net;
 using System.Text;
 using System.Web.Mvc;
-using System.Configuration;
 
 namespace KProyecto.Controllers
 {
     public class HomeController : Controller
     {
+        Utilitarios service = new Utilitarios();
 
         #region Index
 
@@ -35,6 +33,7 @@ namespace KProyecto.Controllers
 
                 if (result != null)
                 {
+                    Session["IdUsuario"] = result.IdUsuario;
                     Session["Nombre"] = result.Nombre;
                     return RedirectToAction("Principal", "Home");
                 }
@@ -111,7 +110,7 @@ namespace KProyecto.Controllers
                     mensaje.Append("Procure realizar el cambio de su contraseña en cuanto ingrese al sistema\n");
                     mensaje.Append("Muchas gracias\n");
 
-                    if (EnviarCorreo(result.Correo, mensaje.ToString(), "Solicitud de acceso"))
+                    if (service.EnviarCorreo(result.Correo, mensaje.ToString(), "Solicitud de acceso"))
                         return RedirectToAction("Index", "Home");
 
                     ViewBag.Mensaje = "No se pudo realizar la notificación de su acceso al sistema";
@@ -129,40 +128,6 @@ namespace KProyecto.Controllers
         public ActionResult Principal()
         {
             return View();
-        }
-
-        private bool EnviarCorreo(string destinatario, string mensaje, string asunto)
-        {
-            try
-            {
-                var remitente = ConfigurationManager.AppSettings["CorreoRemitente"];
-                var contrasena = ConfigurationManager.AppSettings["CorreoPassword"];
-
-                MailMessage mail = new MailMessage();
-                mail.From = new MailAddress(remitente);
-                mail.To.Add(destinatario);
-                mail.Subject = asunto;
-                mail.Body = mensaje;
-                mail.IsBodyHtml = true;
-
-                // Para Office 365
-                SmtpClient smtp = new SmtpClient("smtp.office365.com", 587);
-
-                // Para Gmail (descomenta si usas Gmail en vez de Office365)
-                //SmtpClient smtp = new SmtpClient("smtp.gmail.com", 587);
-
-                smtp.Credentials = new NetworkCredential(remitente, contrasena);
-                smtp.EnableSsl = true;
-
-                smtp.Send(mail);
-                return true;
-
-                //El servidor SMTP requiere una conexión segura o el cliente no se autenticó. La respuesta del servidor fue: 5.7.0 Authentication Required. For more information, go to
-            }
-            catch (Exception)
-            {
-                return false;
-            }
         }
 
     }

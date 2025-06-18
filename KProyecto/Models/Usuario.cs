@@ -1,7 +1,12 @@
-﻿namespace KProyecto.Models
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace KProyecto.Models
 {
-    public class Autenticacion
-    {
+	public class Usuario
+	{
         public string Identificacion { get; set; }
         public string Nombre { get; set; }
         public string Correo { get; set; }
